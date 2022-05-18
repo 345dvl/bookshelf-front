@@ -7,7 +7,7 @@ import { useState } from "react"
 import { app } from "../lib/firebase"
 
 
-const Signup: NextPage = () => {
+const Signin: NextPage = () => {
   const router = useRouter()
   const auth = getAuth(app)
   const [email, setEmail] = useState("")
@@ -28,7 +28,7 @@ const Signup: NextPage = () => {
   return (
     <>
       <h1>
-        サインアップ
+        サインイン
       </h1>
       <form onSubmit={handleSubmit}>
         <div>
@@ -55,8 +55,8 @@ const Signup: NextPage = () => {
           </Button>
         </div>
         <div>
-          <Link href={"/signin"}>
-            <a>ログインはこちら</a>
+          <Link href={"/signup"}>
+            <a>新規登録はこちら</a>
           </Link>
         </div>
       </form>
@@ -64,4 +64,4 @@ const Signup: NextPage = () => {
   )
 }
 
-export default Signup
+export default Signin
