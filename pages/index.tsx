@@ -1,13 +1,22 @@
-import { Alert, Snackbar } from "@mui/material"
+import { Alert, Button, Snackbar } from "@mui/material"
+import { getAuth, signOut } from "firebase/auth"
 import { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
+import { useRouter } from "next/router"
 import { useAuthContext } from "../lib/AuthContext"
+import { app } from "../lib/firebase"
 import styles from '../styles/Home.module.css'
 
 const Index: NextPage = () => {
+  const router = useRouter()
+  const auth = getAuth(app)
   const { user } = useAuthContext()
   const isLoggedIn = !!user
+  const handleLogout = async () => {
+    await signOut(auth)
+    await router.push("/")
+  }
 
   return (
     <>
@@ -38,6 +47,9 @@ const Index: NextPage = () => {
 
         <div><Link href={"./signup"}>新規登録</Link></div>
         <div><Link href={"./signin"}>ログイン</Link></div>
+        {isLoggedIn && <Button type="submit" variant="outlined" onClick={handleLogout}>
+          ログアウト
+        </Button>}
       </div>
     </>
   )
